@@ -1,0 +1,17 @@
+package com.nier.paging.model
+
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
+
+/**
+ * Created by fgd
+ * Date 2019/1/25
+ * RepoSearchResult from a search, which contains LiveData<List<Repo>> holding query data,
+ * and a LiveData<String> of network error state.
+ */
+data class RepoSearchResult(
+        val data: LiveData<PagedList<Repo>>,
+        val networkErrors: LiveData<String>
+//        val data: LiveData<List<Repo>>,
+//        val networkErrors: LiveData<String>
+)

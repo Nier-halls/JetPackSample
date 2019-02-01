@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nier.viewmodelsample">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".livedata.LiveDataSampleActivity" />
+        <activity android:name=".livedata.SampleActivity1" />
+        <activity android:name=".livedata.SampleActivity2" />
+        <activity android:name=".lifecycle.LifeCycleActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nier.room.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name="com.nier.room.NewWordActivity" />
+
+        <activity android:name="com.nier.paging.ui.SearchRepositoriesActivity">
+
+        </activity>
+    </application>
+
+</manifest>

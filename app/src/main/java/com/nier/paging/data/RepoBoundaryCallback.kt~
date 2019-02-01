@@ -1,0 +1,62 @@
+package com.nier.paging.data
+
+/**
+ * Created by fgd
+ * Date 2019/1/30
+ */
+ class RepoBoundaryCallback() : PagedList.BoundaryCallback<Repo>(
+        private val query: String,
+        private val service: GithubService,
+        private val cache: GithubLocalCache
+    ) {
+
+    companion object {
+        private const val NETWORK_PAGE_SIZE = 20
+        private const val DATABASE_PAGE_SIZE = 20
+        private const val TAG = "RepoBoundaryCallback"
+    }
+
+
+    private var lastRequestedPage = 1
+    private val _networkErrors = MutableLiveData<String>()
+    
+    val networkErrors = LiveData<String>
+        get() = _networkErrors
+
+    private var isRequestInProgress = false
+
+
+    private fun requestAndSaveData(query: String) {
+        if (isRequestInProgress) {
+            Log.e(TAG, "requestAndSaveData >>> already a request in progress, query words=$query")
+            return
+        }
+        isRequestInProgress = true
+        wordInProgress = query
+        searchRepos(service, query, lastRequestedPage, NETWORK_PAGE_SIZE,
+                { repos ->
+                    cache.insert(repos) {
+                        Log.d(TAG, ">>> searchRepos finished...")
+                        lastRequestedPage++
+                        isRequestInProgress = false
+                    }
+
+                },
+                { error ->
+                    networkErrors.postValue(error)
+                    isRequestInProgress = false
+                }
+
+        )
+
+    }
+
+
+    override fun onZeroItemsLoaded() {
+    
+    }
+ 
+    override fun onItemAtEndLoaded(itemtAtEnd: Repo) {
+    
+    }
+ }

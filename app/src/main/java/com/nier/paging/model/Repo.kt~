@@ -1,0 +1,12 @@
+package com.nier.paging.model
+
+import androidx.room.Entity
+
+/**
+ * Created by fgd
+ * Date 2019/1/25
+ */
+@Entity(tableName = "repos")
+data class Repo(
+        val id: Long
+)
